@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "Tweet Scraper - Shopee Affiliate",
+  "version": "1.0.0",
+  "description": "Klik kanan pada tweet di Twitter/X untuk ambil teks, link Shopee, dan gambar produk. Ekspor ke CSV / JSON / XLSX / TXT / ZIP Images.",
+  "permissions": ["contextMenus", "storage", "activeTab", "scripting"],
+  "host_permissions": [
+    "https://twitter.com/*",
+    "https://x.com/*",
+    "https://mobile.twitter.com/*",
+    "https://pbs.twimg.com/*",
+    "https://abs.twimg.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Tweet Scraper",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/*",
+        "https://x.com/*",
+        "https://mobile.twitter.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["lib/xlsx.full.min.js", "lib/jszip.min.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

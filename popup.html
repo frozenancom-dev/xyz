@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tweet Scraper</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="hdr">
+      <div class="brand">
+        <div class="logo">T</div>
+        <div>
+          <h1>Tweet Scraper</h1>
+          <p class="sub">Shopee affiliate harvester</p>
+        </div>
+      </div>
+      <div class="count" data-testid="tweet-count">0</div>
+    </header>
+
+    <section class="actions">
+      <div class="export-group">
+        <label class="lbl">Export</label>
+        <div class="btn-row">
+          <button class="btn" data-format="csv" data-testid="export-csv-btn">CSV</button>
+          <button class="btn" data-format="json" data-testid="export-json-btn">JSON</button>
+          <button class="btn" data-format="xlsx" data-testid="export-xlsx-btn">XLSX</button>
+          <button class="btn" data-format="txt" data-testid="export-txt-btn">TXT</button>
+          <button class="btn" id="zipImagesBtn" data-testid="export-zip-btn">ZIP Images</button>
+        </div>
+      </div>
+      <button class="btn danger" id="clearBtn" data-testid="clear-all-btn">Clear</button>
+    </section>
+
+    <section class="hint" id="hintBox" data-testid="hint-box">
+      <strong>Cara pakai:</strong> Buka Twitter/X &rarr; klik kanan pada tweet &rarr; pilih
+      <em>"Extract Tweet (Tweet Scraper)"</em>. Tweet akan otomatis tersimpan di sini.
+    </section>
+
+    <div class="progress" id="progress" data-testid="zip-progress" hidden>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-label" id="progressLabel">Preparing…</div>
+    </div>
+
+    <section class="list" id="list" data-testid="tweet-list"></section>
+
+    <template id="cardTpl">
+      <article class="card">
+        <header class="card-hdr">
+          <a class="handle" target="_blank" rel="noopener"></a>
+          <time class="ts"></time>
+        </header>
+        <div class="text"></div>
+        <div class="links"></div>
+        <div class="imgs"></div>
+        <footer class="card-ftr">
+          <button class="btn xs ghost copy-btn">Copy text</button>
+          <button class="btn xs danger del-btn">Delete</button>
+        </footer>
+      </article>
+    </template>
+
+    <script src="lib/xlsx.full.min.js"></script>
+    <script src="lib/jszip.min.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
